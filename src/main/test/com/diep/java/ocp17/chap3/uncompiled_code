@@ -1,0 +1,84 @@
+    @Test
+    void q4() {
+        var gas = true;
+        do ( // use pointed bracket {}, not round bracket ()
+            System.out.println("helium");
+            gas = gas ^ gas;
+            gas = !gas;
+        ) while (!gas);
+    }
+
+    @Test
+    void q9() {
+        var singer = 0;
+        while (singer) // int cannot be used as boolean in Java
+            System.out.print(singer++);
+    }
+
+    @Test
+    void q10() {
+        int magicNumber = 7;
+        var ok = switch (magicNumber) {
+           case 7 -> true;  break;      // switch expression does not allow break
+           case 9 -> { yield true }     // missing colon after true
+           case 11 -> yield true;       // missing pointed bracket around yield true;
+           case 13 : {yield true;}      // switch expression uses ->, not :
+           default -> false;            // correct
+        }                               // missing semicolon ; after assign value to var ok
+    }
+
+    @Test
+    void q18() {
+        final var GOOD = 100;
+        var score = 10;
+        switch (score) {
+            default:
+            1 :System.out.print("1-");  // not compile, missing case
+            -1 :System.out.print("2-");
+                break;
+            4, 5 :System.out.print("3-");
+            6 :System.out.print("4-");
+            9 :System.out.print("5-");
+        }
+    }
+
+    @Test
+    void q20() {
+        int colorOfRainbow = 10;
+        int red = 5;        // non-final variable cannot be used with case
+        switch(colorOfRainbow) {
+            default:
+                System.out.print("Home");
+                break;
+            case red:
+                System.out.print("Away");
+        }
+    }
+
+    @Test
+    void q21() {
+        Collection<String> kitties = new ArrayList<>();
+        if (kitties instanceof List c) {
+            System.out.println("L " + c.size());
+        } else if (kitties instanceof Map c) {
+            c = new TreeMap<>();                    // ok!
+            System.out.println("M " + c.size());
+        } else {
+            System.out.println("E " + c.size());    // c out of scope, not compilable
+        }
+    }
+
+    @Test
+    void q22() {
+        public void magic () {
+            do {
+                int trick = 0;
+                LOOP:
+                do {
+                    trick++;
+                } while (trick < 2--);      // -- only works for var, not constant
+                continue LOOP;              // LOOP out of scope to refer here
+            } while (1 > 2);
+            System.out.println(trick);      // trick out of scope to refer here
+        }
+    }

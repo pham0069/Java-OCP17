@@ -17,7 +17,12 @@ public class FileDemo {
 
         //createFile();
 
-        createPath();
+        //createPath();
+        String s = "r" + "a" + "t";
+        System.out.println(s == "rat");
+        String r = "ra";
+        r += "t" ;
+        System.out.println(r == "rat");
     }
 
     public static void printFileSeparator() {
